@@ -1,0 +1,54 @@
+/**
+ * Elsner Scaffold — Main Stylesheet
+ *
+ * Entry point. All partials are imported here in cascade order.
+ * PostCSS processes this file through postcss-import, postcss-nested,
+ * postcss-custom-properties, autoprefixer, and cssnano.
+ */
+
+/* 1. Base ----------------------------------------------------------------- */
+@import "base/custom-properties";
+@import "base/reset";
+@import "base/typography";
+@import "base/accessibility";
+
+/* 2. Layout --------------------------------------------------------------- */
+@import "layout/grid";
+@import "layout/header";
+@import "layout/footer";
+@import "layout/sidebar";
+
+/* 3. Components ----------------------------------------------------------- */
+@import "components/buttons";
+@import "components/forms";
+@import "components/navigation";
+@import "components/mobile-menu";
+@import "components/cards";
+@import "components/breadcrumb";
+@import "components/social-links";
+@import "components/pagination";
+@import "components/wysiwyg";
+@import "components/embed";
+
+/* 4. Flexible Content Layouts --------------------------------------------- */
+@import "flexible/hero";
+@import "flexible/text-block";
+@import "flexible/image-text";
+@import "flexible/cards-grid";
+@import "flexible/cta-banner";
+@import "flexible/testimonials";
+@import "flexible/faq";
+@import "flexible/stats";
+@import "flexible/gallery";
+@import "flexible/video";
+
+/* 5. Templates ------------------------------------------------------------ */
+@import "templates/blog";
+@import "templates/single";
+@import "templates/archive";
+@import "templates/search";
+@import "templates/error-404";
+
+/* 6. Utilities ------------------------------------------------------------ */
+@import "utilities/helpers";
+@import "utilities/animations";

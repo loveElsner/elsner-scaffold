@@ -1,0 +1,93 @@
+/**
+ * Utility / Helper classes
+ */
+
+/* Display */
+.hidden { display: none !important; }
+.visible { visibility: visible; }
+.invisible { visibility: hidden; }
+
+/* Text */
+.text-left   { text-align: left; }
+.text-center { text-align: center; }
+.text-right  { text-align: right; }
+
+.text-xs  { font-size: var(--font-size-xs); }
+.text-sm  { font-size: var(--font-size-sm); }
+.text-md  { font-size: var(--font-size-md); }
+.text-lg  { font-size: var(--font-size-lg); }
+.text-xl  { font-size: var(--font-size-xl); }
+
+.font-light    { font-weight: var(--font-weight-light); }
+.font-regular  { font-weight: var(--font-weight-regular); }
+.font-medium   { font-weight: var(--font-weight-medium); }
+.font-semibold { font-weight: var(--font-weight-semibold); }
+.font-bold     { font-weight: var(--font-weight-bold); }
+
+.text-muted   { color: var(--color-text-muted); }
+.text-primary { color: var(--color-primary); }
+.text-white   { color: var(--color-white); }
+
+/* Spacing */
+.mt-0   { margin-top: 0; }
+.mt-4   { margin-top: var(--space-4); }
+.mt-8   { margin-top: var(--space-8); }
+.mt-12  { margin-top: var(--space-12); }
+
+.mb-0   { margin-bottom: 0; }
+.mb-4   { margin-bottom: var(--space-4); }
+.mb-8   { margin-bottom: var(--space-8); }
+.mb-12  { margin-bottom: var(--space-12); }
+
+/* Images */
+.img-cover {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.img-contain {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+}
+
+.img-rounded { border-radius: var(--radius); }
+.img-circle  { border-radius: var(--radius-full); }
+
+/* Aspect ratios */
+.aspect-1-1  { aspect-ratio: 1 / 1; }
+.aspect-16-9 { aspect-ratio: 16 / 9; }
+.aspect-4-3  { aspect-ratio: 4 / 3; }
+.aspect-3-2  { aspect-ratio: 3 / 2; }
+
+/* WordPress alignment classes */
+.alignleft {
+	float: left;
+	margin-right: var(--space-6);
+	margin-bottom: var(--space-4);
+}
+
+.alignright {
+	float: right;
+	margin-left: var(--space-6);
+	margin-bottom: var(--space-4);
+}
+
+.aligncenter {
+	display: block;
+	margin-inline: auto;
+}
+
+.alignwide {
+	max-width: 1100px;
+	margin-inline: auto;
+}
+
+.alignfull {
+	max-width: 100%;
+	width: 100vw;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+}

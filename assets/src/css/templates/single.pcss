@@ -1,0 +1,112 @@
+/**
+ * Single post
+ */
+
+.single-post {
+	max-width: 760px;
+	margin-inline: auto;
+
+	&__header {
+		margin-bottom: var(--space-8);
+	}
+
+	&__meta {
+		margin-bottom: var(--space-4);
+		font-size: var(--font-size-sm);
+		color: var(--color-text-muted);
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-3);
+	}
+
+	&__title {
+		font-size: clamp(var(--font-size-2xl), 4vw, var(--font-size-4xl));
+		font-weight: var(--font-weight-bold);
+		letter-spacing: var(--letter-spacing-tight);
+	}
+
+	& .post-thumbnail {
+		border-radius: var(--radius-xl);
+		overflow: hidden;
+		margin-bottom: var(--space-10);
+
+		& img {
+			width: 100%;
+			height: auto;
+			aspect-ratio: 16 / 7;
+			object-fit: cover;
+		}
+	}
+
+	&__content {
+		margin-bottom: var(--space-10);
+	}
+
+	&__footer {
+		padding-top: var(--space-6);
+		border-top: 1px solid var(--color-border);
+		font-size: var(--font-size-sm);
+		color: var(--color-text-muted);
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-4);
+	}
+}
+
+/* Reading time */
+.reading-time {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--space-1);
+	font-size: var(--font-size-xs);
+	color: var(--color-text-muted);
+
+	&::before {
+		content: '⏱';
+	}
+}
+
+/* Post navigation */
+.post-navigation {
+	margin-top: var(--space-12);
+	padding-top: var(--space-8);
+	border-top: 1px solid var(--color-border);
+
+	& .nav-links {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: var(--space-6);
+		margin-top: 0;
+
+		@media (max-width: 639px) {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	& .nav-previous,
+	& .nav-next {
+		& a {
+			display: flex;
+			flex-direction: column;
+			gap: var(--space-1);
+		}
+
+		& .nav-subtitle {
+			font-size: var(--font-size-xs);
+			font-weight: var(--font-weight-semibold);
+			text-transform: uppercase;
+			letter-spacing: var(--letter-spacing-wider);
+			color: var(--color-text-muted);
+		}
+
+		& .nav-title {
+			font-size: var(--font-size-base);
+			font-weight: var(--font-weight-medium);
+			color: var(--color-secondary);
+		}
+	}
+
+	& .nav-next {
+		text-align: right;
+	}
+}

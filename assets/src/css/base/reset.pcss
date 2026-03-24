@@ -1,0 +1,121 @@
+/**
+ * Modern CSS Reset
+ *
+ * Based on Andy Bell's modern reset + practical additions.
+ */
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+* {
+	margin: 0;
+}
+
+html {
+	-webkit-text-size-adjust: 100%;
+	text-size-adjust: 100%;
+	tab-size: 4;
+	scroll-behavior: smooth;
+
+	@media (prefers-reduced-motion: reduce) {
+		scroll-behavior: auto;
+	}
+}
+
+body {
+	min-height: 100vh;
+	font-family: var(--font-sans);
+	font-size: var(--font-size-base);
+	line-height: var(--line-height-normal);
+	color: var(--color-text);
+	background-color: var(--color-bg);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+	display: block;
+	max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+	font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	overflow-wrap: break-word;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	line-height: var(--line-height-tight);
+}
+
+ul,
+ol {
+	padding: 0;
+	list-style: none;
+}
+
+a {
+	color: var(--color-primary);
+	text-decoration: none;
+	transition: color var(--transition-fast);
+
+	&:hover {
+		color: var(--color-primary-dark);
+	}
+}
+
+button {
+	cursor: pointer;
+	background: none;
+	border: none;
+	padding: 0;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* Remove animations for users who prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+}
+
+/* WordPress admin bar compensation */
+.admin-bar .site-header--sticky {
+	top: 32px;
+
+	@media (max-width: 782px) {
+		top: 46px;
+	}
+}

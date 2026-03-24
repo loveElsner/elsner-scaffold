@@ -1,0 +1,100 @@
+/**
+ * WYSIWYG / rich-text content styles
+ */
+
+.wysiwyg-content,
+.entry-content {
+	& h1, & h2, & h3, & h4, & h5, & h6 {
+		margin-top: var(--space-10);
+		margin-bottom: var(--space-4);
+
+		&:first-child {
+			margin-top: 0;
+		}
+	}
+
+	& p {
+		margin-bottom: var(--space-5);
+		line-height: var(--line-height-relaxed);
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	& ul, & ol {
+		padding-inline-start: var(--space-6);
+		margin-bottom: var(--space-5);
+		list-style: revert;
+	}
+
+	& ul { list-style-type: disc; }
+	& ol { list-style-type: decimal; }
+
+	& li {
+		margin-bottom: var(--space-2);
+		line-height: var(--line-height-relaxed);
+	}
+
+	& a {
+		text-decoration: underline;
+		text-underline-offset: 2px;
+	}
+
+	& blockquote {
+		margin-block: var(--space-8);
+	}
+
+	& img {
+		border-radius: var(--radius);
+		height: auto;
+	}
+
+	& figure {
+		margin-block: var(--space-8);
+	}
+
+	& figcaption {
+		font-size: var(--font-size-sm);
+		color: var(--color-text-muted);
+		text-align: center;
+		margin-top: var(--space-2);
+	}
+
+	& table {
+		width: 100%;
+		border-collapse: collapse;
+		margin-block: var(--space-6);
+		font-size: var(--font-size-sm);
+
+		& th {
+			background: var(--color-gray-100);
+			font-weight: var(--font-weight-semibold);
+			text-align: left;
+			padding: var(--space-3) var(--space-4);
+			border: 1px solid var(--color-border);
+		}
+
+		& td {
+			padding: var(--space-3) var(--space-4);
+			border: 1px solid var(--color-border);
+			vertical-align: top;
+		}
+
+		& tr:nth-child(even) td {
+			background: var(--color-gray-50);
+		}
+	}
+
+	& .wp-block-image {
+		margin-block: var(--space-8);
+
+		& img {
+			max-width: 100%;
+		}
+	}
+
+	& hr {
+		margin-block: var(--space-10);
+	}
+}

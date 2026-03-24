@@ -1,0 +1,21 @@
+/**
+ * Flexible Layout: Text Block
+ */
+
+.es-text-block {
+	&__inner {
+		max-width: 100%;
+
+		&--wide   { max-width: 900px; margin-inline: auto; }
+		&--narrow { max-width: 700px; margin-inline: auto; }
+	}
+
+	&--center {
+		text-align: center;
+
+		& .es-section-description,
+		& .wysiwyg-content {
+			margin-inline: auto;
+		}
+	}
+}

@@ -1,0 +1,53 @@
+/**
+ * Flexible Layout: Video Section
+ */
+
+.es-video-section {
+	&__wrapper {
+		margin-top: var(--space-8);
+	}
+
+	&__poster {
+		position: relative;
+		border-radius: var(--radius-xl);
+		overflow: hidden;
+		cursor: pointer;
+		aspect-ratio: 16 / 9;
+
+		&:hover .es-video-section__play-btn {
+			transform: translate(-50%, -50%) scale(1.1);
+		}
+	}
+
+	&__poster-img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transition: transform var(--transition-slow);
+	}
+
+	&__poster:hover &__poster-img {
+		transform: scale(1.03);
+	}
+
+	&__play-btn {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		background: transparent;
+		border: none;
+		cursor: pointer;
+		transition: transform var(--transition-spring);
+		filter: drop-shadow(0 4px 12px rgb(0 0 0 / 0.4));
+
+		&:hover {
+			transform: translate(-50%, -50%) scale(1.1);
+		}
+	}
+
+	&__embed {
+		border-radius: var(--radius-xl);
+		overflow: hidden;
+	}
+}

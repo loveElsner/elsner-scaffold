@@ -1,0 +1,70 @@
+/**
+ * Flexible Layout: CTA Banner
+ */
+
+.es-cta-banner {
+	position: relative;
+	overflow: hidden;
+
+	&__overlay {
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(135deg, rgb(0 0 0 / 0.2) 0%, transparent 100%);
+		z-index: 1;
+
+		.es-section--bg-image & {
+			background: rgb(0 0 0 / 0.5);
+		}
+	}
+
+	& .container {
+		position: relative;
+		z-index: 2;
+	}
+
+	&__inner {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: var(--space-8);
+
+		@media (max-width: 767px) {
+			flex-direction: column;
+			text-align: center;
+		}
+	}
+
+	&__content {
+		flex: 1;
+	}
+
+	&__heading {
+		font-size: clamp(var(--font-size-2xl), 3vw, var(--font-size-4xl));
+		font-weight: var(--font-weight-bold);
+		color: var(--color-white);
+		letter-spacing: var(--letter-spacing-tight);
+		margin-bottom: var(--space-3);
+	}
+
+	&__subheading {
+		font-size: var(--font-size-md);
+		color: rgb(255 255 255 / 0.85);
+		max-width: 52ch;
+
+		@media (max-width: 767px) {
+			margin-inline: auto;
+		}
+	}
+
+	&__actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-3);
+		flex-shrink: 0;
+
+		@media (max-width: 767px) {
+			justify-content: center;
+		}
+	}
+}

@@ -1,0 +1,71 @@
+/**
+ * Animation utilities
+ */
+
+@keyframes fadeInUp {
+	from {
+		opacity: 0;
+		transform: translateY(24px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes fadeIn {
+	from { opacity: 0; }
+	to   { opacity: 1; }
+}
+
+@keyframes slideInRight {
+	from {
+		opacity: 0;
+		transform: translateX(24px);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+@keyframes pulse {
+	0%, 100% { opacity: 1; }
+	50%       { opacity: 0.6; }
+}
+
+@keyframes spin {
+	from { transform: rotate(0deg); }
+	to   { transform: rotate(360deg); }
+}
+
+/* In-viewport animation trigger classes (applied via JS IntersectionObserver) */
+.js-animate {
+	opacity: 0;
+	transform: translateY(20px);
+	transition: opacity var(--transition-slow), transform var(--transition-slow);
+
+	&.is-visible {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.js-animate-fade {
+	opacity: 0;
+	transition: opacity var(--transition-slow);
+
+	&.is-visible {
+		opacity: 1;
+	}
+}
+
+/* Stagger delays for lists of elements */
+.js-animate-stagger {
+	& > *:nth-child(1) { transition-delay: 0ms; }
+	& > *:nth-child(2) { transition-delay: 100ms; }
+	& > *:nth-child(3) { transition-delay: 200ms; }
+	& > *:nth-child(4) { transition-delay: 300ms; }
+	& > *:nth-child(5) { transition-delay: 400ms; }
+	& > *:nth-child(6) { transition-delay: 500ms; }
+}

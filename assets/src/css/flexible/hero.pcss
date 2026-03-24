@@ -1,0 +1,131 @@
+/**
+ * Flexible Layout: Hero Banner
+ */
+
+.es-hero {
+	position: relative;
+	overflow: hidden;
+	background-color: var(--color-secondary);
+	background-size: cover;
+	background-position: center;
+	color: var(--color-white);
+
+	&__overlay {
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(135deg, rgb(0 0 0 / 0.55) 0%, rgb(0 0 0 / 0.2) 100%);
+		z-index: 1;
+	}
+
+	& .container {
+		position: relative;
+		z-index: 2;
+	}
+
+	&__inner {
+		display: grid;
+		grid-template-columns: 1fr;
+		align-items: center;
+		gap: var(--space-12);
+		padding-block: var(--space-20);
+	}
+
+	/* Has both content and media */
+	&:has(.es-hero__media) &__inner {
+		grid-template-columns: 1fr 1fr;
+
+		@media (max-width: 1023px) {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	&__content {
+		max-width: 640px;
+	}
+
+	&__eyebrow {
+		color: var(--color-white);
+		opacity: 0.85;
+		margin-bottom: var(--space-4);
+	}
+
+	&__heading {
+		font-size: clamp(var(--font-size-3xl), 5vw, var(--font-size-6xl));
+		font-weight: var(--font-weight-extrabold);
+		line-height: var(--line-height-tight);
+		letter-spacing: var(--letter-spacing-tight);
+		color: var(--color-white);
+		margin-bottom: var(--space-5);
+	}
+
+	&__subheading {
+		font-size: clamp(var(--font-size-base), 2vw, var(--font-size-xl));
+		color: rgb(255 255 255 / 0.85);
+		line-height: var(--line-height-relaxed);
+		margin-bottom: var(--space-8);
+		max-width: 52ch;
+	}
+
+	&__buttons {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-3);
+	}
+
+	&__media {
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+
+		@media (max-width: 1023px) {
+			justify-content: center;
+			order: -1;
+		}
+	}
+
+	&__img {
+		width: 100%;
+		max-height: 500px;
+		object-fit: cover;
+		border-radius: var(--radius-xl);
+		box-shadow: var(--shadow-xl);
+	}
+
+	/* No background — light version */
+	&:not(.es-hero--has-bg) {
+		background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-secondary-light) 100%);
+	}
+
+	/* Alignment */
+	&--center &__inner {
+		justify-items: center;
+		text-align: center;
+	}
+
+	&--center &__content {
+		max-width: none;
+	}
+
+	&--center &__subheading {
+		margin-inline: auto;
+	}
+
+	&--center &__buttons {
+		justify-content: center;
+	}
+
+	&--right &__inner {
+		direction: rtl;
+
+		& > * {
+			direction: ltr;
+		}
+	}
+
+	/* Heights */
+	&--medium &__inner  { min-height: 500px; }
+	&--large &__inner   { min-height: 700px; }
+	&--fullscreen &__inner {
+		min-height: calc(100vh - var(--header-height));
+	}
+}
