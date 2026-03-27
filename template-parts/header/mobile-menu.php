@@ -21,9 +21,13 @@
 				</a>
 			<?php endif; ?>
 
-			<button class="mobile-menu__close js-mobile-close" aria-label="<?php esc_attr_e( 'Close menu', 'elsner-scaffold' ); ?>">
-				<svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
-					<path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+			<button
+				class="mobile-menu__close js-mobile-close"
+				aria-label="<?php esc_attr_e( 'Close navigation menu', 'elsner-scaffold' ); ?>"
+				title="<?php esc_attr_e( 'Close', 'elsner-scaffold' ); ?>"
+			>
+				<svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+					<path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
 				</svg>
 			</button>
 		</div>

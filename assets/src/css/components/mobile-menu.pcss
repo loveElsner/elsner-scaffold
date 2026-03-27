@@ -40,7 +40,8 @@
 		flex-direction: column;
 		transform: translateX(100%);
 		transition: transform var(--transition-slow) cubic-bezier(0.25, 0.46, 0.45, 0.94);
-		overflow-y: auto;
+		/* Do NOT set overflow-y here — scrolling belongs to __body so the
+		   header row stays pinned at the top while only nav items scroll.   */
 		overscroll-behavior: contain;
 		box-shadow: var(--shadow-xl);
 	}
@@ -49,7 +50,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		padding: var(--space-4) var(--space-6);
+		padding: var(--space-4) var(--space-5);
 		border-bottom: 1px solid var(--color-border);
 		flex-shrink: 0;
 	}
@@ -58,6 +59,12 @@
 		font-weight: var(--font-weight-bold);
 		font-size: var(--font-size-lg);
 		color: var(--color-secondary);
+		text-decoration: none;
+
+		&:hover {
+			color: var(--color-primary);
+			text-decoration: none;
+		}
 
 		& img {
 			height: 40px;
@@ -65,26 +72,60 @@
 		}
 	}
 
+	/* -----------------------------------------------------------------------
+	 * Close button — must be unmissable.
+	 *
+	 * Design rationale:
+	 *   • The header hamburger is behind the overlay (z-index header < menu),
+	 *     so the ONLY escape route the user sees is this button.
+	 *   • Solid dark fill + white icon = maximum contrast on the white panel.
+	 *   • Larger tap target (44×44 px — Apple / WCAG recommendation).
+	 * --------------------------------------------------------------------- */
 	&__close {
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		width: 36px;
-		height: 36px;
+		flex-shrink: 0;
+		width: 44px;
+		height: 44px;
 		border-radius: var(--radius-sm);
-		color: var(--color-gray-500);
-		transition: color var(--transition-fast), background-color var(--transition-fast);
+
+		/* Filled dark background so the × pops immediately */
+		background-color: var(--color-secondary);
+		color: var(--color-white);
+		cursor: pointer;
+
+		transition:
+			background-color var(--transition-fast),
+			color var(--transition-fast),
+			transform var(--transition-fast);
 
 		&:hover {
-			color: var(--color-secondary);
-			background-color: var(--color-gray-100);
+			background-color: var(--color-primary);
+			transform: rotate(90deg);  /* satisfying rotation on hover */
+		}
+
+		&:focus-visible {
+			outline: 2px solid var(--color-primary);
+			outline-offset: 2px;
+		}
+
+		/* Make the SVG icon slightly larger for clarity */
+		& svg {
+			width: 22px;
+			height: 22px;
+			stroke-width: 2.5;
 		}
 	}
 
 	&__body {
 		flex: 1;
+		min-height: 0;            /* required: lets flex constrain height so
+		                             overflow-y:auto can actually activate    */
 		padding: var(--space-4) 0;
 		overflow-y: auto;
+		-webkit-overflow-scrolling: touch; /* smooth momentum scroll on iOS  */
+		overscroll-behavior: contain;
 	}
 }
 

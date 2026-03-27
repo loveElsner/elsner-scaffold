@@ -232,3 +232,22 @@ function elsner_scaffold_widgets_init() {
 	}
 }
 add_action( 'widgets_init', 'elsner_scaffold_widgets_init' );
+
+/**
+ * Remove the search form from the WordPress admin bar on the front-end.
+ *
+ * Logged-in users would otherwise see two search UIs: the admin bar's
+ * built-in search and the theme's own header search panel.  Keeping only
+ * the theme search gives a consistent experience for every visitor.
+ */
+function elsner_scaffold_clean_admin_bar() {
+	if ( is_admin() ) {
+		return;
+	}
+
+	global $wp_admin_bar;
+
+	// Remove the magnifying-glass search node from the front-end toolbar.
+	$wp_admin_bar->remove_node( 'search' );
+}
+add_action( 'wp_before_admin_bar_render', 'elsner_scaffold_clean_admin_bar', 20 );
