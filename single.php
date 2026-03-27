@@ -2,6 +2,10 @@
 /**
  * The template for displaying all single posts.
  *
+ * Content is capped at .container--narrow (900 px) so the reading line
+ * never stretches across a wide desktop viewport.  Post navigation and
+ * comments share the same column.
+ *
  * @package ElsnerScaffold
  * @since   1.0.0
  */
@@ -10,8 +14,8 @@ get_header();
 ?>
 
 <main id="primary" class="site-main">
-	<div class="container">
-		<div class="content-area">
+	<div class="container container--narrow">
+		<div class="single-entry">
 
 			<?php
 			while ( have_posts() ) :
@@ -33,8 +37,8 @@ get_header();
 			endwhile;
 			?>
 
-		</div>
-	</div>
+		</div><!-- .single-entry -->
+	</div><!-- .container -->
 </main><!-- #primary -->
 
 <?php

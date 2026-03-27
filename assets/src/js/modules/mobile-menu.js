@@ -60,6 +60,9 @@ export function initMobileMenu() {
 	// Helpers
 	// -----------------------------------------------------------------------
 	function openMenu() {
+		// Signal other components (header search panel, etc.) to close first.
+		document.dispatchEvent( new CustomEvent( 'elsner:mobilemenuopen' ) );
+
 		menu.classList.add( 'is-open' );
 		menu.removeAttribute( 'aria-hidden' );
 		toggle.setAttribute( 'aria-expanded', 'true' );
@@ -73,6 +76,9 @@ export function initMobileMenu() {
 		toggle.setAttribute( 'aria-expanded', 'false' );
 		document.body.style.overflow = '';
 	}
+
+	// Close mobile menu if the search panel opens.
+	document.addEventListener( 'elsner:searchopen', () => closeMenu() );
 
 	/**
 	 * Trap keyboard focus inside the menu panel.

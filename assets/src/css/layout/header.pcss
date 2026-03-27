@@ -1,13 +1,47 @@
 /**
  * Site Header
+ *
+ * The <header#masthead> is the containing block for .header-search because it
+ * carries position: sticky (or relative). Keep overflow UNSET so the
+ * absolutely-positioned search panel can paint outside the header's height box.
+ *
+ * BACKDROP BLUR STRATEGY
+ * ──────────────────────
+ * Do NOT apply backdrop-filter directly on .site-header.
+ *
+ * Any element with backdrop-filter ≠ none becomes a containing block for
+ * position:fixed descendants (CSS Filters / Transforms spec, all browsers).
+ * Setting it on the header would therefore break every position:fixed
+ * element that lives inside OR is stacked on top of the header — including
+ * the mobile-menu overlay.
+ *
+ * Instead the blur is placed on a ::before pseudo-element that:
+ *   • Has no children → cannot be a containing block for anything.
+ *   • Is positioned absolute so it fills the header without affecting flow.
+ *   • Gets opacity:0 / opacity:1 toggled via the .is-scrolled class.
  */
 
 .site-header {
-	position: relative;
+	position: relative;          /* containing block for .header-search */
 	z-index: var(--z-sticky);
 	background-color: var(--color-white);
 	border-bottom: 1px solid var(--color-border);
-	transition: box-shadow var(--transition-base), background-color var(--transition-base);
+	transition: box-shadow var(--transition-base);
+	/* Never set overflow here – it would re-anchor .header-search */
+
+	/* Blur layer — lives on a pseudo so it cannot become a containing block */
+	&::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		z-index: -1;              /* paint behind header content             */
+		backdrop-filter: blur(10px);
+		-webkit-backdrop-filter: blur(10px);
+		background-color: rgb(255 255 255 / 0.92);
+		opacity: 0;               /* invisible until .is-scrolled            */
+		transition: opacity var(--transition-base);
+		pointer-events: none;
+	}
 
 	&--sticky {
 		position: sticky;
@@ -16,9 +50,10 @@
 
 	&.is-scrolled {
 		box-shadow: var(--shadow-sm);
-		background-color: rgb(255 255 255 / 0.95);
-		backdrop-filter: blur(10px);
-		-webkit-backdrop-filter: blur(10px);
+
+		&::before {
+			opacity: 1;           /* reveal the blur layer when scrolled     */
+		}
 	}
 
 	&__inner {
@@ -33,6 +68,32 @@
 		align-items: center;
 		gap: var(--space-3);
 		margin-inline-start: auto;
+		/* No position set here — keeps .header-search anchored to #masthead */
+	}
+}
+
+/* -------------------------------------------------------------------------
+ * WordPress Admin Bar — sticky header offset
+ *
+ * When wp-admin bar is present (#wpadminbar, position: fixed):
+ *   - Desktop:  32px tall
+ *   - ≤782px:   46px tall (also removed from flow on narrow screens)
+ * WordPress adds the `admin-bar` class to <body> automatically.
+ * ------------------------------------------------------------------------- */
+.admin-bar .site-header--sticky {
+	top: 32px;
+}
+
+@media screen and (max-width: 782px) {
+	.admin-bar .site-header--sticky {
+		top: 46px;
+	}
+}
+
+/* When admin bar switches to relative positioning on small screens */
+@media screen and (max-width: 600px) {
+	.admin-bar .site-header--sticky {
+		top: 0;
 	}
 }
 
@@ -105,28 +166,46 @@
 	}
 }
 
-/* Header search */
+/* -------------------------------------------------------------------------
+ * Header search panel
+ *
+ * Lives as a direct child of <header#masthead> (outside .container), so
+ * position: absolute references #masthead as its containing block.
+ * left: 0 / right: 0 therefore stretch edge-to-edge with the full header.
+ *
+ * The inner .container centres the form content at the same column width
+ * as the rest of the header, keeping things visually aligned.
+ * ------------------------------------------------------------------------- */
 .header-search {
 	position: absolute;
-	top: 100%;
-	left: 0;
+	top: 100%;         /* flush below the bottom edge of #masthead          */
+	left: 0;           /* full-width — relative to #masthead, not .container */
 	right: 0;
+	z-index: var(--z-overlay);   /* above sticky (200), below modal (400)   */
 	background: var(--color-white);
 	border-top: 1px solid var(--color-border);
-	border-bottom: 1px solid var(--color-border);
-	padding: var(--space-4) 0;
-	z-index: var(--z-dropdown);
-	transform: translateY(-10px);
+	border-bottom: 2px solid var(--color-border);
+	box-shadow: var(--shadow-md);
+	padding: var(--space-5) 0;
+
+	/* Hidden by default */
 	opacity: 0;
 	visibility: hidden;
-	transition: transform var(--transition-base), opacity var(--transition-base), visibility var(--transition-base);
+	transform: translateY(-8px);
+	transition:
+		opacity var(--transition-base),
+		visibility var(--transition-base),
+		transform var(--transition-base);
+	pointer-events: none;
 
 	&.is-open {
-		transform: translateY(0);
 		opacity: 1;
 		visibility: visible;
+		transform: translateY(0);
+		pointer-events: auto;
 	}
 
+	/* Inner container: same column grid as the rest of the header */
 	& .container {
 		display: flex;
 		align-items: center;
@@ -135,14 +214,49 @@
 
 	& .search-form {
 		flex: 1;
+
+		& .search-field {
+			width: 100%;
+			height: 48px;
+			padding: 0 var(--space-4);
+			font-size: var(--font-size-base);
+			border: 2px solid var(--color-border);
+			border-radius: var(--radius-full);
+			background: var(--color-gray-50);
+			transition: border-color var(--transition-fast), background-color var(--transition-fast);
+
+			&:focus {
+				border-color: var(--color-primary);
+				background: var(--color-white);
+				outline: none;
+			}
+		}
+
+		& .search-submit {
+			/* Screen-reader only — styled search field is the visual affordance */
+			position: absolute;
+			width: 1px;
+			height: 1px;
+			padding: 0;
+			margin: -1px;
+			overflow: hidden;
+			clip: rect(0, 0, 0, 0);
+			white-space: nowrap;
+			border: 0;
+		}
 	}
 
 	&__close {
 		flex-shrink: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 40px;
+		height: 40px;
 		color: var(--color-gray-500);
-		padding: var(--space-2);
 		border-radius: var(--radius-sm);
 		transition: color var(--transition-fast), background-color var(--transition-fast);
+		cursor: pointer;
 
 		&:hover {
 			color: var(--color-secondary);

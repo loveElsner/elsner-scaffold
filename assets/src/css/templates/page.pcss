@@ -1,0 +1,85 @@
+/**
+ * Page template — fallback layout (no ACF flexible content)
+ *
+ * Rendered inside .container--narrow (max-width: 900px) so content never
+ * stretches edge-to-edge on wide viewports.
+ */
+
+/* Vertical breathing room for standard pages */
+.page .site-main,
+.page-template-default .site-main {
+	padding-block: var(--space-16);
+}
+
+/* -------------------------------------------------------------------------
+ * Page entry wrapper
+ * ------------------------------------------------------------------------- */
+.page-entry {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-10);
+}
+
+/* -------------------------------------------------------------------------
+ * Article
+ * ------------------------------------------------------------------------- */
+.page-article {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-8);
+
+	/* Page title */
+	&__header {
+		border-bottom: 1px solid var(--color-border);
+		padding-bottom: var(--space-6);
+	}
+
+	&__title {
+		font-size: clamp(var(--font-size-2xl), 4vw, var(--font-size-4xl));
+		font-weight: var(--font-weight-bold);
+		letter-spacing: var(--letter-spacing-tight);
+		line-height: var(--line-height-tight);
+		color: var(--color-secondary);
+	}
+
+	/* Featured image */
+	&__thumbnail {
+		border-radius: var(--radius-xl);
+		overflow: hidden;
+	}
+
+	&__thumbnail-img {
+		width: 100%;
+		height: auto;
+		aspect-ratio: 16 / 6;
+		object-fit: cover;
+		display: block;
+	}
+
+	/* Body copy */
+	&__content {
+		/* wysiwyg class handles typography — see components/wysiwyg.pcss */
+	}
+
+	/* Edit link (logged-in admins only) */
+	&__footer {
+		padding-top: var(--space-4);
+		border-top: 1px solid var(--color-border);
+		font-size: var(--font-size-sm);
+		color: var(--color-text-muted);
+	}
+}
+
+/* -------------------------------------------------------------------------
+ * Single-post entry wrapper
+ * Mirrors .page-entry so single.php and page.php both get breathing room.
+ * ------------------------------------------------------------------------- */
+.single .site-main {
+	padding-block: var(--space-16);
+}
+
+.single-entry {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-10);
+}
